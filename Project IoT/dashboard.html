@@ -1,337 +1,162 @@
-<style>
-    /* Global Styles */
-    body {
-      font-family: Nunito, sans-serif;
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-  
-    /* Container and Layout */
-    .dashboard-container {
-      background-color: #f6f9ff;
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-      min-height: 100vh;
-      padding: 30px; /* Memberikan ruang di sekitar kontainer utama */
-    }
-  
-    .main-content {
-      margin-top: 30px; /* Menambah jarak dari atas */
-      width: 100%;
-      max-width: 1200px;
-      display: flex;
-      gap: 30px;
-      margin: 0 auto;
-    }
-  
-    .content-wrapper {
-      display: flex;
-      width: 100%;
-    }
-  
-    /* Sidebar Styles */
-    .sidebar-column {
-      display: flex;
-      flex-direction: column;
-      width: 24%; /* Membatasi lebar sidebar */
-      min-width: 250px;
-      padding: 20px; /* Menambah padding di dalam sidebar */
-      background-color: #fff;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Bayangan sidebar */
-      border-radius: 10px; /* Membulatkan sudut sidebar */
-    }
-  
-    /* Main Column Styles */
-    .main-column {
-      display: flex;
-      flex-direction: column;
-      width: 76%; /* Mengatur lebar konten utama */
-      padding: 20px; /* Menambah padding agar konten tidak menempel pada tepi */
-    }
-  
-    /* Header Styles */
-    .main-header {
-      background-color: #4154f1;
-      box-shadow: 0 2px 20px rgba(1, 41, 112, .1);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 15px 30px;
-      color: #fff;
-      border-radius: 10px; /* Membulatkan sudut header */
-    }
-  
-    .logo-section {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-    }
-  
-    .logo-img {
-      aspect-ratio: 1.04;
-      object-fit: contain;
-      width: 48px;
-      box-shadow: 0 4px 4px rgba(0, 0, 0, .25);
-    }
-  
-    .logo-text {
-      display: flex;
-      flex-direction: column;
-    }
-  
-    .system-title {
-      font-weight: 700;
-      font-size: 18px;
-    }
-  
-    .university-name {
-      font-weight: 900;
-      font-size: 20px;
-      margin-top: 7px;
-    }
-  
-    .header-nav {
-      display: flex;
-      align-items: center;
-      gap: 30px;
-    }
-  
-    /* Profile and Status Indicators */
-    .status-indicator {
-      display: flex;
-      align-items: center;
-    }
-  
-    .status-red,
-    .status-green {
-      border-radius: 50%;
-      width: 18px;
-      height: 18px;
-      padding: 3px;
-    }
-  
-    .status-red {
-      background-color: #ff0000;
-    }
-  
-    .status-green {
-      background-color: #198754;
-    }
-  
-    .user-profile {
-      display: flex;
-      gap: 10px;
-      align-items: center;
-    }
-  
-    .profile-img {
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      object-fit: cover;
-    }
-  
-    .username {
-      font-weight: 600;
-      font-size: 14px;
-    }
-  
-    /* Sidebar Navigation */
-    .main-sidebar {
-      background-color: #fff;
-      box-shadow: 0 0 20px rgba(1, 41, 112, .1);
-      padding: 20px;
-      color: #012970;
-      font-weight: 600;
-      font-size: 15px;
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-      border-radius: 10px;
-    }
-  
-    .nav-menu {
-      list-style: none;
-      padding: 0;
-    }
-  
-    .nav-menu li {
-      margin-bottom: 16px;
-    }
-  
-    .nav-link {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      color: #012970;
-      text-decoration: none;
-      font-weight: 600;
-    }
-  
-    .nav-link:hover {
-      color: #4154f1;
-    }
-  
-    /* Breadcrumb and Dashboard Section */
-    .dashboard-title {
-      font-weight: 600;
-      font-size: 26px;
-      color: #4154f1;
-    }
-  
-    .breadcrumb {
-      display: flex;
-      gap: 5px;
-      font-size: 14px;
-      font-weight: 600;
-    }
-  
-    .breadcrumb-home {
-      color: #989797;
-    }
-  
-    .breadcrumb-separator {
-      color: #989797;
-    }
-  
-    .breadcrumb-current {
-      color: #444;
-    }
-  
-    /* Profile Card */
-    .profile-card {
-      background-color: #fff;
-      box-shadow: 0 0 30px rgba(1, 41, 112, .1);
-      display: flex;
-      align-items: center;
-      padding: 20px;
-      margin-top: 30px;
-      border-radius: 10px; /* Membulatkan sudut card */
-      width: 100%; /* Pastikan card memenuhi lebar kontainer */
-      max-width: 100%; /* Agar lebar profile card memenuhi layar */
-      box-sizing: border-box; /* Untuk memastikan margin dan padding diperhitungkan */
-    }
-  
-    .profile-info {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      margin-left: 20px;
-    }
-  
-    .greeting {
-      font-size: 18px;
-      font-weight: 700;
-      color: #012970;
-    }
-  
-    .profile-name {
-      font-size: 26px;
-      font-weight: 700;
-      color: #4154f1;
-    }
-  
-    .student-id,
-    .department,
-    .faculty {
-      font-size: 14px;
-      color: #7d7d7d;
-    }
-  
-    /* Responsive Styles */
-    @media (max-width: 991px) {
-      .main-header,
-      .logo-section,
-      .header-nav,
-      .main-content,
-      .dashboard-section {
-        max-width: 100%;
-      }
-  
-      .content-wrapper {
-        flex-direction: column;
-      }
-  
-      .sidebar-column,
-      .main-column {
-        width: 100%;
-      }
-  
-      .main-sidebar {
-        margin-top: 40px;
-        padding-bottom: 100px;
-      }
-  
-      .dashboard-section {
-        margin-top: 40px;
-      }
-    }
-  </style>
-  
-  <main class="dashboard-container">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sistem Presensi</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdn.lineicons.com/5.0/lineicons.css" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="index.css"
+    rel="stylesheet"
+  />
+</head>
+<body class="bg-gray-100 font-family: 'Poppins', sans-serif;">
+  <!-- Dashboard Container -->
+  <div class="min-h-screen flex flex-col">
     <!-- Header Section -->
-    <header class="main-header">
-      <section class="logo-section">
-        <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/f2c13e48ffbff7e52ae45a6b12fe72a062171ff4a1399d7e8543dcc6a90e0041?placeholderIfAbsent=true&apiKey=1eedba21888049e7b7be0235525493ec" alt="University Logo" class="logo-img">
-        <div class="logo-text">
-          <h1 class="system-title">Sistem Presensi Perkuliahan Mahasiswa</h1>
-          <p class="university-name">Universitas Lampung</p>
+    <header class="bg-blue-600 text-white shadow-lg p-4 flex justify-between items-center">
+      <div class="flex items-center gap-4">
+        <img src="png/logo_unila.png" alt="University Logo" class="w-12 h-12 object-contain">
+        <div>
+          <h1 class="text-lg font-bold">Sistem Presensi Perkuliahan Mahasiswa</h1>
+          <p class="text-sm font-semibold">Universitas Lampung</p>
         </div>
-      </section>
-      <nav class="header-nav">
-        <div class="status-indicator">
-          <span class="status-red" role="status" aria-label="Status Indicator Red"></span>
-        </div>
-        <div class="status-indicator">
-          <span class="status-green" role="status" aria-label="Status Indicator Green"></span>
-        </div>
-        <div class="user-profile">
-          <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/6f191b4e5b25eb8f2e2f11b4ab25f8bcfe5f175029f7d9e0371444d967f00409?placeholderIfAbsent=true&apiKey=1eedba21888049e7b7be0235525493ec" alt="User Profile Picture" class="profile-img">
-          <span class="username">Divany Pangestika</span>
-        </div>
-      </nav>
-    </header>
-  
-    <!-- Main Content Section -->
-    <div class="main-content">
-      <div class="content-wrapper">
-        <!-- Sidebar Section -->
-        <aside class="sidebar-column">
-          <nav class="main-sidebar" aria-label="Main Navigation">
-            <ul class="nav-menu">
-              <li><a href="#" class="nav-link active">Dashboard</a></li>
-              <li><a href="#" class="nav-link">Daftar Presensi</a></li>
-              <li><a href="#" class="nav-link">Jadwal Kuliah</a></li>
-              <li><a href="#" class="nav-link">Keluar</a></li>
-            </ul>
-          </nav>
-        </aside>
-  
-        <!-- Main Column Section -->
-        <section class="main-column">
-          <div class="dashboard-section">
-            <h2 class="dashboard-title">Dashboard</h2>
-            <nav class="breadcrumb" aria-label="Breadcrumb">
-              <span class="breadcrumb-home">Beranda</span>
-              <span class="breadcrumb-separator">/</span>
-              <span class="breadcrumb-current">Dashboard</span>
-            </nav>
-  
-            <!-- Profile Card Section -->
-            <article class="profile-card">
-              <div class="profile-info">
-                <p class="greeting">Selamat Pagi</p>
-                <h3 class="profile-name">Divany Pangestika</h3>
-                <p class="student-id">2215061036</p>
-                <p class="department">S1 Teknik Informatika</p>
-                <p class="faculty">Fakultas Teknik</p>
-              </div>
-            </article>
-          </div>
-        </section>
       </div>
+      <div class="flex items-center gap-4">
+        <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/6f191b4e5b25eb8f2e2f11b4ab25f8bcfe5f175029f7d9e0371444d967f00409?placeholderIfAbsent=true&apiKey=1eedba21888049e7b7be0235525493ec" 
+          alt="User Profile Picture" class="w-10 h-10 rounded-full">
+        <span class="font-medium">Divany Pangestika</span>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="flex flex-grow">
+      <!-- Sidebar -->
+      <aside id="sidebar" class="bg-white shadow-lg px-4 w-64 transition-all duration-300 ease-in-out">
+        <nav class="w-48 ml-2">
+          <ul class="space-y-4 mt-6">
+            <li>
+              <a href="#" class="flex items-center gap-3 text-gray-700 hover:text-blue-600">
+                <i class="lni lni-dashboard-square-1 text-2xl" style="color: #012970;"></i>
+                <span class="nav-text font-bold text-sm" style="color: #012970;">Dashboard</span>
+              </a>
+            </li>
+            <li>
+              <a href="#" class="flex items-center gap-3 text-gray-700 hover:text-blue-600">
+                <i class="lni lni-layout-9 text-2xl" style="color: #012970;"></i>
+                <span class="nav-text font-bold text-sm" style="color: #012970;">Daftar Presensi</span>
+              </a>
+            </li>
+            <li>
+              <a href="#" class="flex items-center gap-3 text-gray-700 hover:text-blue-600">
+                <i class="lni lni-calendar-days text-2xl" style="color: #012970;"></i>
+                <span class="nav-text font-bold text-sm" style="color: #012970;">Jadwal Kuliah</span>
+              </a>
+            </li>
+            <li>
+              <a href="#" class="flex items-center gap-3 text-gray-700 hover:text-blue-600">
+                <i class="lni lni-bar-chart-4 text-2xl" style="color: #012970;"></i>
+                <span class="nav-text font-bold text-sm" style="color: #012970;">Rekapitulasi Presensi</span>
+              </a>
+            </li>
+            <li>
+              <a href="login.html" class="flex items-center gap-3 text-gray-700 hover:text-blue-600">
+                <i class="lni lni-exit text-2xl" style="color: #012970;transform: rotate(180deg);"></i>
+                <span class="nav-text font-bold text-sm" style="color: #012970;">Keluar</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+        <div class="flex items-center" style="position: absolute; bottom: 0; width: 100%; height: 50px">
+          <button 
+            id="collapse-btn" 
+            class="mt-4 ml-2 text-gray-500 hover:text-blue-600 focus:outline-none flex items-center justify-center">
+            <i class="lni lni-chevron-right-circle text-3xl" style="color: #012970;"></i>
+          </button>
+        </div>
+      </aside>
+
+      <!-- Main Section -->
+      <main class="flex-grow p-4">
+          <!-- Content -->
+          <div class="p-4">
+            <h2 class="text-2xl font-semibold mb-4">Dashboard</h2>
+            <nav class="text-sm text-gray-500 mb-6">
+              <span>Beranda</span> / <span class="font-semibold" style="color: black;">Dashboard</span>
+            </nav>
+             <div class="grid grid-cols-2 md:grid-cols-2 gap-6 mt-2">
+                <!-- Welcome Card -->
+                <div class="md:col-span-2 bg-white shadow rounded p-4">
+                  <h3 class="text-lg font-semibold">Selamat Pagi</h3>
+                    <p class="text-blue-500 font-bold text-xl">Ir. Divany Pangestika, S.T., M.T.</p>
+                    <p class="text-sm text-gray-600">
+                      Program Studi Teknik Informatika<br>Jurusan Teknik Elektro<br>Fakultas Teknik
+                    </p>
+                </div>
+                <div class="md:col-span-1">
+                   <div class="bg-white shadow rounded text-sm text-center text-blue-800" style="height: 30px; align-content: center;">
+                      <strong>Periode Akademik Ganjil 2024/2025</strong>
+                   </div>
+                    <div class="mt-4 bg-white p-4 rounded shadow text-sm" style="height: 35%;">
+                        Hari ini: Rabu, 27 November 2024<br>
+                        <strong class="text-blue-500">Dalam masa perkuliahan</strong>
+                    </div>
+                    <div class="mt-4 bg-white rounded shadow p-4 rounded text-sm" style="height: 35%;">
+                        <p>Jadwal yang akan datang</p>
+                        <p><strong class="text-blue-500">INF620202 - ANTARMUKA DAN PERIPHERAL</strong></p>
+                    </div>
+                </div>
+
+                <!-- Announcements -->
+                <div class="md:col-span-1 bg-white shadow rounded px-4 py-2">
+                    <p class="text-lg font-semibold text-blue-800">Pengumuman</p>
+                    <div class="mt-2 text-sm">
+                        <p>
+                            <strong class="text-blue-500">Gangguan Jaringan</strong><br>
+                            Sehubungan dengan adanya gangguan pada router di jaringan kampus, maka akses internet (termasuk SIPRES), menjadi agak terganggu. Perbaikan akan dilakukan pada sore hari nanti.
+                        </p>
+                        <p class="mt-4">
+                            <strong class="text-blue-500">Lorem ipsum</strong><br>
+                            Tidak ada Pengumuman
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </main>
     </div>
-  </main>
-  
+  </div>
+
+  <script>
+    // Toggle Sidebar Collapse
+    const collapseBtn = document.getElementById("collapse-btn");
+    const sidebar = document.getElementById("sidebar");
+    const collapseIcon = collapseBtn.querySelector("i");  // Mendapatkan ikon collapse
+
+    collapseBtn.addEventListener("click", () => {
+      const navText = sidebar.querySelectorAll('.nav-text');
+      sidebar.classList.toggle("w-20"); // Lebar saat collapse
+      sidebar.classList.toggle("w-64"); // Lebar saat diperluas
+
+      // Toggle visibility of the text
+      navText.forEach((item) => {
+        item.classList.toggle("hidden");
+      });
+
+      // Ganti ikon collapse berdasarkan status sidebar
+      if (sidebar.classList.contains("w-20")) {
+        collapseIcon.classList.remove('lni-chevron-left-circle'); // Ikon collapse kiri
+        collapseIcon.classList.add('lni-chevron-right-circle');   // Ikon collapse kanan
+      } else {
+        collapseIcon.classList.remove('lni-chevron-right-circle'); // Ikon collapse kanan
+        collapseIcon.classList.add('lni-chevron-left-circle');    // Ikon collapse kiri
+      }
+    });
+
+
+  </script>
+</body>
+</html>
