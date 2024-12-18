@@ -37,8 +37,8 @@
       <!-- Sidebar -->
       <aside id="sidebar" class="bg-white shadow-lg px-4 w-64 transition-all duration-300 ease-in-out">
         <nav class="w-48 ml-2">
-          <ul class="space-y-4 mt-6">
-            Beranda
+          <ul class="space-y-2 mt-4 mb-4">
+            <p class="item-list">Beranda</p>
             <li>
               <a href="dashboard.html" class="flex items-center gap-3 text-gray-700 hover:text-blue-600">
                 <i class="lni lni-dashboard-square-1 text-2xl" style="color: #012970;"></i>
@@ -46,7 +46,7 @@
               </a>
             </li>
             <li>
-              <a href="/Project IoT/presensi/presensi.html" class="flex items-center gap-3 text-gray-700 hover:text-blue-600">
+              <a href="presensi.html" class="flex items-center gap-3 text-gray-700 hover:text-blue-600">
                 <i class="lni lni-layout-9 text-2xl" style="color: #012970;"></i>
                 <span class="nav-text font-bold text-sm" style="color: #012970;">Daftar Presensi</span>
               </a>
@@ -63,8 +63,10 @@
                 <span class="nav-text font-bold text-sm" style="color: #012970;">Rekapitulasi Presensi</span>
               </a>
             </li>
+          </ul>
+          <ul class="space-y-2">
+            <p class="item-list">Keluar</p>
             <li>
-              Keluar
               <a href="login.html" class="flex items-center gap-3 text-gray-700 hover:text-blue-600">
                 <i class="lni lni-exit text-2xl" style="color: #012970;transform: rotate(180deg);"></i>
                 <span class="nav-text font-bold text-sm" style="color: #012970;">Keluar</span>
@@ -140,11 +142,16 @@
 
     collapseBtn.addEventListener("click", () => {
       const navText = sidebar.querySelectorAll('.nav-text');
+      const itemList = sidebar.querySelectorAll('.item-list');
       sidebar.classList.toggle("w-20"); // Lebar saat collapse
       sidebar.classList.toggle("w-64"); // Lebar saat diperluas
 
       // Toggle visibility of the text
       navText.forEach((item) => {
+        item.classList.toggle("hidden");
+      });
+
+      itemList.forEach((item) =>{
         item.classList.toggle("hidden");
       });
 
