@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sistem Presensi</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdn.lineicons.com/5.0/lineicons.css" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="index.css"
+    rel="stylesheet"
+  />
+</head>
+<body class="bg-gray-100 font-family: 'Poppins', sans-serif;">
+  <!-- Dashboard Container -->
+  <div class="min-h-screen flex flex-col">
+    <!-- Header Section -->
+    <header class="bg-blue-600 text-white shadow-lg p-4 flex justify-between items-center">
+      <div class="flex items-center gap-4">
+        <img src="png/logo_unila.png" alt="University Logo" class="w-12 h-12 object-contain">
+        <div>
+          <h1 class="text-lg font-bold">Sistem Presensi Perkuliahan Mahasiswa</h1>
+          <p class="text-sm font-semibold">Universitas Lampung</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-4">
+        <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/6f191b4e5b25eb8f2e2f11b4ab25f8bcfe5f175029f7d9e0371444d967f00409?placeholderIfAbsent=true&apiKey=1eedba21888049e7b7be0235525493ec" 
+          alt="User Profile Picture" class="w-10 h-10 rounded-full">
+        <span class="font-medium">Divany Pangestika</span>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="flex flex-grow">
+      <!-- Sidebar -->
+      <aside id="sidebar" class="bg-white shadow-lg px-4 w-64 transition-all duration-300 ease-in-out">
+        <nav class="w-48 ml-2">
+          <ul class="space-y-4 mt-6">
+            Beranda
+            <li>
+              <a href="/Project IoT/dashboard.html" class="flex items-center gap-3 text-gray-700 hover:text-blue-600">
+                <i class="lni lni-dashboard-square-1 text-2xl" style="color: #012970;"></i>
+                <span class="nav-text font-bold text-sm" style="color: #012970;">Dashboard</span>
+              </a>
+            </li>
+            <li>
+              <a href="/Project IoT/presensi/presensi.html" class="flex items-center gap-3 text-gray-700 hover:text-blue-600">
+                <i class="lni lni-layout-9 text-2xl" style="color: #012970;"></i>
+                <span class="nav-text font-bold text-sm" style="color: #012970;">Daftar Presensi</span>
+              </a>
+            </li>
+            <li>
+              <a href="#" class="flex items-center gap-3 text-gray-700 hover:text-blue-600">
+                <i class="lni lni-calendar-days text-2xl" style="color: #012970;"></i>
+                <span class="nav-text font-bold text-sm" style="color: #012970;">Jadwal Kuliah</span>
+              </a>
+            </li>
+            <li>
+              <a href="/Project IoT/presensi/rekapitulasi.html" class="flex items-center gap-3 text-gray-700 hover:text-blue-600">
+                <i class="lni lni-bar-chart-4 text-2xl" style="color: #012970;"></i>
+                <span class="nav-text font-bold text-sm" style="color: #012970;">Rekapitulasi Presensi</span>
+              </a>
+            </li>
+            <li>
+              Keluar
+              <a href="/Project IoT/login.html" class="flex items-center gap-3 text-gray-700 hover:text-blue-600">
+                <i class="lni lni-exit text-2xl" style="color: #012970;transform: rotate(180deg);"></i>
+                <span class="nav-text font-bold text-sm" style="color: #012970;">Keluar</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+        <div class="flex items-center" style="position: absolute; bottom: 0; width: 100%; height: 50px">
+          <button 
+            id="collapse-btn" 
+            class="mt-4 ml-2 text-gray-500 hover:text-blue-600 focus:outline-none flex items-center justify-center">
+            <i class="lni lni-chevron-right-circle text-3xl" style="color: #012970;"></i>
+          </button>
+        </div>
+      </aside>
+
+      <!-- Main Content -->
+    <div class="w-4/5 p-6">
+        <!-- Class Information -->
+        <div class="bg-white p-4 rounded-lg shadow-md mb-6">
+          <div class="flex justify-between">
+            <div>
+              <span class="text-blue-700 font-bold text-lg">INF620201</span>
+              <p class="text-gray-700 font-medium mt-1">Interaksi Manusia dan Komputer (D)</p>
+              <p class="text-gray-500 text-sm mt-1">Rabu • 07.30-10.00 • Ruang H5</p>
+            </div>
+            <div>
+              <span class="bg-gray-200 px-4 py-1 rounded text-gray-700">Pertemuan 4</span>
+              <button class="bg-blue-600 text-white px-4 py-1 rounded ml-4 hover:bg-blue-700">Akhiri Kelas</button>
+            </div>
+          </div>
+          <p class="text-gray-600 mt-2">Topik Perkuliahan: <span class="font-semibold">Kuis 1</span></p>
+        </div>
+  
+        <!-- Attendance Summary -->
+        <div class="grid grid-cols-5 gap-4 mb-6">
+          <div class="bg-green-100 text-green-700 p-4 rounded-lg text-center">
+            <h3 class="text-2xl font-bold">38</h3>
+            <p class="text-sm">Hadir</p>
+          </div>
+          <div class="bg-blue-100 text-blue-700 p-4 rounded-lg text-center">
+            <h3 class="text-2xl font-bold">0</h3>
+            <p class="text-sm">Sakit</p>
+          </div>
+          <div class="bg-yellow-100 text-yellow-700 p-4 rounded-lg text-center">
+            <h3 class="text-2xl font-bold">1</h3>
+            <p class="text-sm">Izin</p>
+          </div>
+          <div class="bg-red-100 text-red-700 p-4 rounded-lg text-center">
+            <h3 class="text-2xl font-bold">1</h3>
+            <p class="text-sm">Alfa</p>
+          </div>
+          <div class="bg-gray-100 text-gray-700 p-4 rounded-lg text-center">
+            <h3 class="text-2xl font-bold">40</h3>
+            <p class="text-sm">Total Mahasiswa</p>
+          </div>
+        </div>
+  
+        <!-- Attendance List -->
+        <div class="bg-white p-4 rounded-lg shadow-md">
+          <table class="w-full table-auto border-collapse">
+            <thead>
+              <tr class="text-left bg-blue-600 text-white">
+                <th class="p-2">NPM/Nama Mahasiswa</th>
+                <th class="p-2 text-center">Status Kehadiran</th>
+              </tr>
+            </thead>
+            <tbody>
+                <tr class="hover:bg-gray-50 border-t">
+                  <td class="p-2 flex items-center space-x-4">
+                    <span class="font-medium">2215061001</span>
+                    <span class="text-black-600">Divany Pangestika</span>
+                  </td>
+                  <td class="p-2 text-center text-green-600 font-medium">Hadir</td>
+                </tr>
+                <tr class="hover:bg-gray-50 border-t">
+                  <td class="p-2 flex items-center space-x-4">
+                    <span class="font-medium">2215061002</span>
+                    <span class="text-black-600">Nurul Fajri</span>
+                  </td>
+                  <td class="p-2 text-center text-yellow-600 font-medium">Izin</td>
+                </tr>
+                <tr class="hover:bg-gray-50 border-t">
+                  <td class="p-2 flex items-center space-x-4">
+                    <span class="font-medium">2215061003</span>
+                    <span class="text-black-600">Diva Estika</span>
+                  </td>
+                  <td class="p-2 text-center">?</td>
+                </tr>
+              </tbody>
+              
+          </table>
+        </div>
+
+  <script>
+    // Toggle Sidebar Collapse
+    const collapseBtn = document.getElementById("collapse-btn");
+    const sidebar = document.getElementById("sidebar");
+    const collapseIcon = collapseBtn.querySelector("i");  // Mendapatkan ikon collapse
+
+    collapseBtn.addEventListener("click", () => {
+      const navText = sidebar.querySelectorAll('.nav-text');
+      sidebar.classList.toggle("w-20"); // Lebar saat collapse
+      sidebar.classList.toggle("w-64"); // Lebar saat diperluas
+
+      // Toggle visibility of the text
+      navText.forEach((item) => {
+        item.classList.toggle("hidden");
+      });
+
+      // Ganti ikon collapse berdasarkan status sidebar
+      if (sidebar.classList.contains("w-20")) {
+        collapseIcon.classList.remove('lni-chevron-left-circle'); // Ikon collapse kiri
+        collapseIcon.classList.add('lni-chevron-right-circle');   // Ikon collapse kanan
+      } else {
+        collapseIcon.classList.remove('lni-chevron-right-circle'); // Ikon collapse kanan
+        collapseIcon.classList.add('lni-chevron-left-circle');    // Ikon collapse kiri
+      }
+    });
+
+
+  </script>
+</body>
+</html>
