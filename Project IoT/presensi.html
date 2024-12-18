@@ -37,9 +37,9 @@
   <!-- Sidebar -->
   <aside id="sidebar" class="bg-white shadow-lg px-4 w-64 transition-all duration-300 ease-in-out">
     <nav class="w-48 ml-2">
-      <ul class="space-y-4 mt-6">
+      <ul class="space-y-2 mt-4 mb-4">
+        <p class="item-list">Beranda</p>
         <li>
-          Beranda
           <a href="dashboard.html" class="flex items-center gap-3 text-gray-700 hover:text-blue-600">
             <i class="lni lni-dashboard-square-1 text-2xl" style="color: #012970;"></i>
             <span class="nav-text font-bold text-sm" style="color: #012970;">Dashboard</span>
@@ -63,8 +63,10 @@
             <span class="nav-text font-bold text-sm" style="color: #012970;">Rekapitulasi Presensi</span>
           </a>
         </li>
+      </ul>
+      <ul class="space-y-2">
+        <p class="item-list">Keluar</p>
         <li>
-          Keluar
           <a href="login.html" class="flex items-center gap-3 text-gray-700 hover:text-blue-600">
             <i class="lni lni-exit text-2xl" style="color: #012970;transform: rotate(180deg);"></i>
             <span class="nav-text font-bold text-sm" style="color: #012970;">Keluar</span>
@@ -120,63 +122,90 @@
               <th class="py-2 px-4 border">Realisasi</th>
             </tr>
           </thead>
-          <tbody>
-            <tr class="text-sm text-gray-600 border-t hover:bg-gray-50">
-              <td class="py-2 px-4">INF620201<br><a href="kelas.html" class="font-semibold text-blue-600">Interaksi Manusia dan Komputer (C)</a><br>Rabu 07:30 - 10:00 Ruang H5</td>
-              <td class="py-2 px-4">3</td>
-              <td class="py-2 px-4">S1 Teknik Informatika</td>
-              <td class="py-2 px-4">5/16</td>
-            </tr>
-            <tr class="text-sm text-gray-600 border-t hover:bg-gray-50">
-              <td class="py-2 px-4">INF620201<br><span class="font-semibold text-blue-600">Interaksi Manusia dan Komputer (D)</span><br>Rabu 07:30 - 10:00 Ruang H5</td>
-              <td class="py-2 px-4">3</td>
-              <td class="py-2 px-4">S1 Teknik Informatika</td>
-              <td class="py-2 px-4">5/16</td>
-            </tr>
-            <tr class="text-sm text-gray-600 border-t hover:bg-gray-50">
-              <td class="py-2 px-4">UNI620109<br><span class="font-semibold text-blue-600">Pendidikan Etika dan Kearifan Lokal (D)</span><br>Rabu 10:50 - 12:30 Ruang H20</td>
-              <td class="py-2 px-4">2</td>
-              <td class="py-2 px-4">S1 Teknik Informatika</td>
-              <td class="py-2 px-4">5/16</td>
-            </tr>
-            <tr class="text-sm text-gray-600 border-t hover:bg-gray-50">
-              <td class="py-2 px-4">INF620102<br><span class="font-semibold text-blue-600">Teknik Digital (D)</span><br>Rabu 13:00 - 15:30 Ruang H17</td>
-              <td class="py-2 px-4">3</td>
-              <td class="py-2 px-4">S1 Teknik Informatika</td>
-              <td class="py-2 px-4">5/16</td>
-            </tr>
+          <tbody id="table-body">
+            
           </tbody>
         </table>
       </div>
     </div>
+  </main>
   
-    <script>
-      // Toggle Sidebar Collapse
-      const collapseBtn = document.getElementById("collapse-btn");
-      const sidebar = document.getElementById("sidebar");
-      const collapseIcon = collapseBtn.querySelector("i");  // Mendapatkan ikon collapse
-  
-      collapseBtn.addEventListener("click", () => {
-        const navText = sidebar.querySelectorAll('.nav-text');
-        sidebar.classList.toggle("w-20"); // Lebar saat collapse
-        sidebar.classList.toggle("w-64"); // Lebar saat diperluas
-  
-        // Toggle visibility of the text
-        navText.forEach((item) => {
-          item.classList.toggle("hidden");
-        });
-  
-        // Ganti ikon collapse berdasarkan status sidebar
-        if (sidebar.classList.contains("w-20")) {
-          collapseIcon.classList.remove('lni-chevron-left-circle'); // Ikon collapse kiri
-          collapseIcon.classList.add('lni-chevron-right-circle');   // Ikon collapse kanan
-        } else {
-          collapseIcon.classList.remove('lni-chevron-right-circle'); // Ikon collapse kanan
-          collapseIcon.classList.add('lni-chevron-left-circle');    // Ikon collapse kiri
-        }
+  <script>
+    // Toggle Sidebar Collapse
+    const collapseBtn = document.getElementById("collapse-btn");
+    const sidebar = document.getElementById("sidebar");
+    const collapseIcon = collapseBtn.querySelector("i");  // Mendapatkan ikon collapse
+
+    collapseBtn.addEventListener("click", () => {
+      const navText = sidebar.querySelectorAll('.nav-text');
+      const itemList = sidebar.querySelectorAll('.item-list');
+      sidebar.classList.toggle("w-20"); // Lebar saat collapse
+      sidebar.classList.toggle("w-64"); // Lebar saat diperluas
+
+      // Toggle visibility of the text
+      navText.forEach((item) => {
+        item.classList.toggle("hidden");
       });
+
+      itemList.forEach((item) =>{
+        item.classList.toggle("hidden");
+      });
+
+      // Ganti ikon collapse berdasarkan status sidebar
+      if (sidebar.classList.contains("w-20")) {
+        collapseIcon.classList.remove('lni-chevron-left-circle'); // Ikon collapse kiri
+        collapseIcon.classList.add('lni-chevron-right-circle');   // Ikon collapse kanan
+      } else {
+        collapseIcon.classList.remove('lni-chevron-right-circle'); // Ikon collapse kanan
+        collapseIcon.classList.add('lni-chevron-left-circle');    // Ikon collapse kiri
+      }
+    });
   
-  
-    </script>
+      
+    // Fungsi untuk mengambil data dari API
+    async function fetchMataKuliah(id) {
+      try {
+        const response = await fetch(`http://localhost:8080/api/v1/mata-kuliah/${id}`);
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        const data = await response.json();
+        renderTable(data); // Panggil fungsi untuk menampilkan data di tabel
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    }
+
+    // Fungsi untuk menampilkan data di tabel
+    function renderTable(data) {
+      const tableBody = document.querySelector("#table-body");
+
+      // Kosongkan tabel sebelum diisi ulang
+      tableBody.innerHTML = "";
+
+      // Tambahkan data ke dalam tabel
+      const row = `
+        <tr class="text-sm text-gray-600 border-t hover:bg-gray-50">
+          <td class="py-2 px-4">
+            ${data.kode_mk}<br>
+            <a href="kelas.html"> <span class="font-semibold text-blue-600">${data.nama_mk} (${data.kelas})</span> </a> <br>
+            ${data.JadwalKuliah.hari} ${data.JadwalKuliah.jam_mulai.split('T')[1].substring(0,5)} - ${data.JadwalKuliah.jam_selesai.split('T')[1].substring(0,5)} Ruang ${data.JadwalKuliah.ruang}
+          </td>
+          <td class="py-2 px-4">${data.sks}</td>
+          <td class="py-2 px-4">S1 Teknik Informatika</td>
+          <td class="py-2 px-4">5/16</td>
+        </tr>
+      `;
+
+      tableBody.insertAdjacentHTML("beforeend", row);
+    }
+
+    // Panggil fungsi untuk mengambil data saat halaman dimuat (dengan id contoh 1)
+    document.addEventListener("DOMContentLoaded", () => {
+      fetchMataKuliah(1);
+    });
+
+
+  </script>
     
 </html>
